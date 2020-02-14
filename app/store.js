@@ -1,17 +1,20 @@
 import Giphy from "./Models/Giphy.js";
 
 let _state = {
+  /** @type {Giphy} */
   activeGiphy: null,
   /** @type {Giphy[]} */
-  giphys: []
+  giphys: [],
+  myGiphys: []
 };
 
 /** Collection of listeners to be called based on keyed state changes
  * @type {{[x:string]: function[]}}
  */
 let _listeners = {
-  activegiphy: [],
-  giphys: []
+  activeGiphy: [],
+  giphys: [],
+  myGiphys: []
 };
 
 //NOTE You should not need to change the code from this point down
