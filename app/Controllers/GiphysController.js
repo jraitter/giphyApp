@@ -44,6 +44,8 @@ export default class GiphysController {
   }
   getSearchGiphys(event) {
     event.preventDefault();
+    let formData = event.target;
+    GiphysService.getGiphyByQuery(formData.query.value)
   }
   setActive(id) {
     GiphysService.setActive(id);

@@ -10,7 +10,7 @@ let _sandboxApi = axios.create({
 
 // @ts-ignore
 let _giphyApi = axios.create({
-  baseURL: "//api.giphy.com/v1/gifs/trending?api_key=6UdS940c1uEgUYJC1LYkpPWRIZu5BiyK",
+  baseURL: "//api.giphy.com/v1/gifs",
   timeout: 3000
 });
 
@@ -21,7 +21,7 @@ class GiphysService {
   }
   getApiGiphys() {
     _giphyApi
-      .get("")
+      .get("trending?api_key=6UdS940c1uEgUYJC1LYkpPWRIZu5BiyK")
       .then(result => {
         let apiGiphs = result.data.data.map(g => new Giphy(g))
         store.commit("giphys", apiGiphs)
@@ -30,6 +30,19 @@ class GiphysService {
         throw new Error(err);
       });
   }
+
+  getGiphyByQuery(query) {
+    _giphyApi
+      .get("search?api_key=6UdS940c1uEgUYJC1LYkpPWRIZu5BiyK&q=" + query)
+      .then(result => {
+        let apiGiphs = result.data.data.map(g => new Giphy(g))
+        store.commit("giphys", apiGiphs)
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
+  }
+
   setActive(id) {
     let giphy = store.State.giphys.find(g => g.id == id);
     if (!giphy) {
